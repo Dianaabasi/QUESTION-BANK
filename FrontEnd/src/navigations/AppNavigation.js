@@ -6,6 +6,7 @@ import SignUp from "../screens/SignUpScreen/SignUpScreen";
 import TabNavigation from "./TabNavigation";
 import ChatScreen from "../screens/ChatScreen/ChatScreen";
 import StartTrail from "../screens/OnboardingScreen/StartTrial";
+import Payment from "../screens/Payments/Payment";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const AppNavigation = () => {
       >
         <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="StartTrial" component={StartTrail} />
+        <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="Tab" component={TabNavigation} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen

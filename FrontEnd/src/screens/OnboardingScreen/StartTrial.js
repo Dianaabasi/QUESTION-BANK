@@ -17,6 +17,10 @@ const StartTrail = () => {
    const handleBtn = () => {
      navigation.navigate("Tab");
    };
+  
+  const handleCard = () => {
+    navigation.navigate("Payment");
+  }
     let [fontsLoaded] = useFonts({
       Poppins_500Medium,
       Poppins_700Bold,
@@ -41,7 +45,7 @@ const StartTrail = () => {
           all the tools necessary to excel in your academic pursuits.
         </Text>
       </View>
-      <TouchableOpacity style={styles.card} className="shadow-2xl">
+      <TouchableOpacity  onPress={handleCard} style={styles.card} className="shadow-2xl">
         <View className="flex-row items-center">
           <MaterialCommunityIcons name="crown" color="#E36414" size={25} />
           <Text className="" style={styles.cardText}>Premium</Text>
