@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const SignUpScreen = () => {
   return (
-    <View>
+    <View className="my-10 mx-10">
       <Text>SignUpScreen</Text>
     </View>
   )

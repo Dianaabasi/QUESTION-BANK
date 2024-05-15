@@ -2,7 +2,7 @@ import { View, Text, FlatList, Dimensions, Image, TouchableOpacity } from 'react
 import React, { useRef, useState } from 'react'
 import { rMS, rS, rV } from "../../Responsive/responsive";
 import { useNavigation } from "@react-navigation/native";
-
+// import data from "./data"
 
 const { width, height } = Dimensions.get("screen");
 
