@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import AppNavigation from "./src/navigations/AppNavigation";
+import Splash from "./src/screens/SplashScreen/Splash";
 
-// import AppNavigation from "./src/navigations/AppNavigation"
 export default function App() {
-  return <AppNavigation/>;
+  const [isSplashScreen, setSplashScreen] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSplashScreen(false);
+    }, 3000);
+  })
+  return (
+    <>
+      {isSplashScreen? <Splash/> : <AppNavigation/> }
+    </>
+  )
 }
