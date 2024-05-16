@@ -7,6 +7,7 @@ import TabNavigation from "./TabNavigation";
 import ChatScreen from "../screens/ChatScreen/ChatScreen";
 import StartTrail from "../screens/OnboardingScreen/StartTrial";
 import Payment from "../screens/Payments/Payment";
+import PaymentCard from "../screens/Payments/PaymentCard";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,13 +21,11 @@ const AppNavigation = () => {
         <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="StartTrial" component={StartTrail} />
         <Stack.Screen name="Payment" component={Payment} />
+        <Stack.Screen name="PaymentCard" component={PaymentCard} />
         <Stack.Screen name="Tab" component={TabNavigation} />
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen
-          options={{ headerShown: true }}
-          name="ChatBot"
-          component={ChatScreen}
-        />
+        <Stack.Screen name="ChatBot" component={ChatScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
