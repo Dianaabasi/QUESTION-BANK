@@ -91,7 +91,7 @@ const HomeScreen = () => {
             Fugiat laboris consequat ullamco quis
           </Text>
           <TouchableOpacity className="flex-row">
-            <Text className="bg-white text-center justify-items-center mt-12 rounded-2xl h-10 w-[100]">
+            <Text className="bg-white p-3 px-6 rounded-xl shadow-2xl shadow-black">
               premium
             </Text>
           </TouchableOpacity>

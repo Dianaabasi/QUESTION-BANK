@@ -15,7 +15,7 @@ const StartTrail = () => {
     const navigation = useNavigation();
 
    const handleBtn = () => {
-     navigation.navigate("Tab");
+     navigation.navigate("SignUp");
    };
   
   const handleCard = () => {
