@@ -8,6 +8,7 @@ import ChatScreen from "../screens/ChatScreen/ChatScreen";
 import StartTrail from "../screens/OnboardingScreen/StartTrial";
 import Payment from "../screens/Payments/Payment";
 import PaymentCard from "../screens/Payments/PaymentCard";
+import Chats from "../screens/ChatScreen/Chats";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const AppNavigation = () => {
         <Stack.Screen name="Tab" component={TabNavigation} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ChatBot" component={ChatScreen} />
+        <Stack.Screen name="Chats" component={Chats} />
         
       </Stack.Navigator>
     </NavigationContainer>
