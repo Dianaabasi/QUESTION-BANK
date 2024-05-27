@@ -9,13 +9,13 @@ const Chats = () => {
 
 
   const handleSendBtn = () => {
-    console.log("Sucess")
+    console.log(input)
 
     fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`,
+        Authorization: "Bearer sk-proj-REzlXQqpzsxIlfwxww3xT3BlbkFJG6dCD3dO02MX2lantgMn",
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
