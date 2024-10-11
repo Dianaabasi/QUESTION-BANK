@@ -16,17 +16,17 @@ import img_icon_1 from "../../assets/UTME.png";
 import img_icon_2 from "../../assets/leaderboard.png";
 import img_icon_3 from "../../assets/CARRER.png";
 
-const items = [
-  { id: 1, icon: img_icon, title: "CBT Pratices" },
-  { id: 2, icon: img_icon_1, title: "UTME Challenge" },
-  { id: 3, icon: img_icon_2, title: "Leaderboard" },
-  { id: 4, icon: img_icon_3, title: "Career/Institution" },
-];
-
 const HomeScreen = () => {
   const navigation = useNavigation();
   const _carousel = useRef();
   const [currentIndex, setCurrentIndex] = useState(0); // State to keep track of the current index
+
+  const items = [
+    { id: 1, icon: img_icon, title: "CBT Pratices", action: "" },
+    { id: 2, icon: img_icon_1, title: "UTME Challenge", action: "" },
+    { id: 3, icon: img_icon_2, title: "Leaderboard", action: "" },
+    { id: 4, icon: img_icon_3, title: "Career/Institution", action: "" },
+  ];
 
   const handleBot = () => {
     navigation.navigate("ChatBot");
@@ -110,7 +110,12 @@ const HomeScreen = () => {
           className="w-10 h-10 rounded-full p-2 bg-slate-400"
           source={require("../../assets/user.png")}
         />
-        <Text className="text-2xl font-bold">Hello, Daniella</Text>
+        <Text
+          style={{ fontFamily: "Poppins_600SemiBold" }}
+          className="text-2xl"
+        >
+          Hello, Daniella
+        </Text>
       </View>
       <View style={{ height: 360 }}>
         <FlatList
@@ -137,7 +142,12 @@ const HomeScreen = () => {
             return (
               <TouchableOpacity className="flex-1 justify-between bg-white p-12 m-2 items-center rounded-2xl shadow-2xl ">
                 <Image className="w-16 h-16 mb-2" source={item.icon} />
-                <Text className="mt-1 mb-0 font-semibold">{item.title}</Text>
+                <Text
+                  style={{ fontFamily: "Poppins_600SemiBold" }}
+                  className="mt-1 mb-0"
+                >
+                  {item.title}
+                </Text>
               </TouchableOpacity>
             );
           }}

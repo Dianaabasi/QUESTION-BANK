@@ -1,5 +1,12 @@
-import { View, Text, FlatList, Dimensions, Image, TouchableOpacity } from 'react-native'
-import React, { useRef, useState } from 'react'
+import {
+  View,
+  Text,
+  FlatList,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import React, { useRef, useState } from "react";
 import { rMS, rS, rV } from "../../Responsive/responsive";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,13 +22,12 @@ const data = [
   {
     id: 2,
     title: "How We Help",
-    desc: "JAMB Quizzes: Take JAMB quizzes to test your knowledge and track your progress. Compete with other students and improve your skills.Chatbot Assistance: Engage with our chatbot for immediate assistance, personalized study tips, and answers to your questions.",
+    desc: "Take JAMB quizzes to test your knowledge and track your progress. Compete with other students and improve your skills. Engage with our chatbot for immediate assistance, personalized study tips, and answers to your questions.",
     img: require("../../assets/onboarding_2.png"),
   },
-  
 ];
 
-const Slides = ({ item }) => { 
+const Slides = ({ item }) => {
   return (
     <View className="items-center" style={{ width, height }}>
       <Image
@@ -31,16 +37,22 @@ const Slides = ({ item }) => {
       />
 
       <View className="items-center text-center mb-48 flex-[0.4]">
-        <Text className="font-bold text-3xl text-blue-950 mb-4">
+        <Text
+          style={{ fontFamily: "Poppins_600SemiBold" }}
+          className="text-3xl text-blue-950 mb-4"
+        >
           {item.title}
         </Text>
-        <Text className="text-lg text-center font-medium text-blue-950 mx-8">
+        <Text
+          style={{ fontFamily: "Poppins_500Medium" }}
+          className="text-lg text-center text-blue-950 mx-8"
+        >
           {item.desc}
         </Text>
       </View>
     </View>
   );
-}
+};
 
 const OnboardingScreen = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -80,13 +92,19 @@ const OnboardingScreen = () => {
               onPress={handleBtnSkip}
               className=" flex-1 mx-2 mr-10 p-4 items-center"
             >
-              <Text style={{ color: "#A8A8A8" }}>Skip</Text>
+              <Text
+                style={{ color: "#A8A8A8", fontFamily: "Poppins_500Medium" }}
+              >
+                Skip
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={gotToNxtSlide}
               className="flex-1 items-center p-4 bg-[#1D3D78] rounded-3xl mx-8"
             >
-              <Text style={{ color: "#fff" }}>Next</Text>
+              <Text style={{ color: "#fff", fontFamily: "Poppins_500Medium" }}>
+                Next
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -95,9 +113,9 @@ const OnboardingScreen = () => {
   };
 
   const updateCurrentSlideIndex = (e) => {
-      const offsetX = e.nativeEvent.contentOffset.x;
-      setContentOffsetX(offsetX);
-      setCurrentSlideIndex(Math.round(offsetX / width));
+    const offsetX = e.nativeEvent.contentOffset.x;
+    setContentOffsetX(offsetX);
+    setCurrentSlideIndex(Math.round(offsetX / width));
   };
 
   const gotToNxtSlide = () => {
@@ -105,10 +123,10 @@ const OnboardingScreen = () => {
       navigation.navigate("StartTrial");
       return;
     } else {
-    const nxtSlideindex = currentSlideIndex + 1;
-    const offset = nxtSlideindex * width;
-    ref.current.scrollToOffset({ offset, animated: true });
-    setCurrentSlideIndex(nxtSlideindex);
+      const nxtSlideindex = currentSlideIndex + 1;
+      const offset = nxtSlideindex * width;
+      ref.current.scrollToOffset({ offset, animated: true });
+      setCurrentSlideIndex(nxtSlideindex);
     }
   };
 
@@ -131,6 +149,6 @@ const OnboardingScreen = () => {
       <Pagination />
     </View>
   );
-}
+};
 
-export default OnboardingScreen
+export default OnboardingScreen;

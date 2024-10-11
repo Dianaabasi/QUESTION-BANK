@@ -1,14 +1,34 @@
 import { useEffect, useState } from "react";
 import AppNavigation from "./src/navigations/AppNavigation";
-import Splash from "./src/screens/SplashScreen/Splash";
+import SplashScreen from "./src/screens/SplashScreen/Splash";
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_700Bold,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
 
 export default function App() {
   const [isSplashScreen, setSplashScreen] = useState(true);
+  let [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+    Poppins_700Bold,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+  });
 
   useEffect(() => {
-    setTimeout(() => {
-      setSplashScreen(false);
-    }, 3000);
-  });
-  return <>{isSplashScreen ? <Splash /> : <AppNavigation />}</>;
+    if (fontsLoaded) {
+      setTimeout(() => {
+        setSplashScreen(false);
+      }, 3000);
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  return <>{isSplashScreen ? <SplashScreen /> : <AppNavigation />}</>;
 }

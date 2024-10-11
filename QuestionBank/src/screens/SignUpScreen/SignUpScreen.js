@@ -8,29 +8,48 @@ import {
   View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const SignUpScreen = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
 
   const navigation = useNavigation();
-  const gohome = () => {
+  const goHome = () => {
     navigation.navigate("Tab");
   };
 
   return (
     <View className="flex-1">
-      <View className=" mx-20 bg-slate-100 rounded-2xl flex-row p-1 mt-20 justify-around items-center shadow-2xl">
+      <View className=" mx-20 bg-slate-200 rounded-2xl flex-row p-1 mt-20 justify-around items-center shadow-2xl">
         <TouchableOpacity
           onPress={() => setShowLoginForm(true)}
-          className="bg-white p-3 px-6 rounded-xl shadow-2xl shadow-black"
+          className={`${
+            showLoginForm ? "bg-[#1D3D78]" : "bg-white"
+          } p-3 px-8 rounded-xl shadow-2xl shadow-black`}
         >
-          <Text className="text-[#1D3D78] text-base text-center">Sign in</Text>
+          <Text
+            style={{ fontFamily: "Poppins_600SemiBold" }}
+            className={`${
+              showLoginForm ? "text-white" : "text-[#1D3D78]"
+            } text-base text-center`}
+          >
+            Sign in
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setShowLoginForm(false)}
-          className="bg-[#1D3D78] p-3 px-6 rounded-2xl shadow-2xl shadow-black"
+          className={`${
+            !showLoginForm ? "bg-[#1D3D78]" : "bg-white"
+          }  p-3 px-8 rounded-2xl shadow-2xl shadow-black`}
         >
-          <Text className="text-white text-base">Sign Up</Text>
+          <Text
+            style={{ fontFamily: "Poppins_600SemiBold" }}
+            className={`${
+              showLoginForm ? "text-[#1D3D78]" : "text-white"
+            } text-base text-center`}
+          >
+            Sign Up
+          </Text>
         </TouchableOpacity>
       </View>
       {!showLoginForm ? (
@@ -38,69 +57,172 @@ const SignUpScreen = () => {
         <>
           <View className=" mt-10 mx-8">
             <View className="p mb-2">
-              <Text className="text-2xl font-bold">Hello there,</Text>
-              <Text>Good to have you here</Text>
+              <Text
+                style={{ fontFamily: "Poppins_700Bold" }}
+                className="text-2xl"
+              >
+                Hello there,
+              </Text>
+              <Text style={{ fontFamily: "Poppins_500Medium" }}>
+                Good to have you here
+              </Text>
             </View>
 
-            <TextInput
-              className="border-b-2 font-bold text-lg p-2 mt-7  border-gray-500"
-              placeholder="Student Name"
-            />
-            <TextInput
-              className="border-b-2 font-bold text-lg p-3 mt-7 border-gray-500"
-              placeholder="Email"
-            />
-            <TextInput
-              className="border-b-2 font-bold text-lg p-3 mt-7 border-gray-500"
-              placeholder="Password"
-            />
-            <TextInput
-              className="border-b-2 font-bold text-lg p-3 mt-7 border-gray-500"
-              placeholder="Confirm Password"
-            />
+            <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
+              <MaterialCommunityIcons
+                name="account-outline"
+                color="black"
+                size={25}
+              />
+              <TextInput
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="ml-2 text-lg flex-1 "
+                placeholder="Student Name"
+              />
+            </View>
+            <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
+              <MaterialCommunityIcons
+                name="email-outline"
+                color="black"
+                size={25}
+              />
+              <TextInput
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="ml-2 text-lg flex-1 "
+                placeholder="Email"
+              />
+            </View>
+            <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
+              <MaterialCommunityIcons
+                name="lock-outline"
+                color="black"
+                size={25}
+              />
+              <TextInput
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="ml-2 text-lg flex-1 "
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              <MaterialCommunityIcons
+                name="eye-outline"
+                color="black"
+                size={25}
+              />
+            </View>
+            <View className="flex-row border-b-2 py-2 my-6 border-gray-500">
+              <MaterialCommunityIcons
+                name="lock-outline"
+                color="black"
+                size={25}
+              />
+              <TextInput
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="ml-2 text-lg flex-1 "
+                placeholder="Comfrim Password"
+                secureTextEntry={true}
+              />
+              <MaterialCommunityIcons
+                name="eye-outline"
+                color="black"
+                size={25}
+              />
+            </View>
+
             <TouchableOpacity
-              onPress={gohome}
+              onPress={goHome}
               className="bg-[#1D3D78] mt-16 rounded-3xl py-3 items-center"
             >
-              <Text className="text-white text-lg">Sign Up</Text>
+              <Text
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="text-white text-lg"
+              >
+                Sign Up
+              </Text>
             </TouchableOpacity>
           </View>
-          <Image
-            className="w-[160%] h-96 top-32 left-[-240]  object-cover"
-            source={require("../../assets/curve.png")}
-          />
         </>
       ) : (
         //login from
         <>
           <View className=" mt-10 mx-8">
             <View className="p mb-2">
-              <Text className="text-2xl font-bold">Welcome Back,</Text>
-              <Text>Good to see again</Text>
+              <Text
+                style={{ fontFamily: "Poppins_700Bold" }}
+                className="text-2xl"
+              >
+                Welcome Back,
+              </Text>
+              <Text style={{ fontFamily: "Poppins_500Medium" }}>
+                Good to see again
+              </Text>
             </View>
-
-            <TextInput
-              className="border-b-2 font-bold text-lg p-2 mt-7  border-gray-500"
-              placeholder="Email"
-            />
-            <TextInput
-              className="border-b-2 font-bold text-lg p-3 mt-7 border-gray-500"
-              placeholder="Password"
-            />
-
+            <View className="flex-row border-b-2 py-2 my-5 border-gray-500">
+              <MaterialCommunityIcons
+                name="email-outline"
+                color="black"
+                size={25}
+              />
+              <TextInput
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="ml-2 text-lg flex-1 "
+                placeholder="Email"
+              />
+            </View>
+            <View className="flex-row border-b-2 py-2 my-5 border-gray-500">
+              <MaterialCommunityIcons
+                name="lock-outline"
+                color="black"
+                size={25}
+              />
+              <TextInput
+                style={{ fontFamily: "Poppins_600SemiBold" }}
+                className="ml-2 text-lg flex-1 "
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              <MaterialCommunityIcons
+                name="eye-outline"
+                color="black"
+                size={25}
+              />
+            </View>
+            <View className="flex-row mt-8 justify-between">
+              <TouchableOpacity
+                onPress={() => setShowLoginForm(true)}
+                className="text-sm text-[#1D3D78] hover:text-[#F2F2F2]"
+              >
+                <Text style={{ fontFamily: "Poppins_500Medium" }}>
+                  Remember me
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setShowLoginForm(false)}
+                className="text-sm text-[#1D3D78] hover:text-[#F2F2F2]"
+              >
+                <Text style={{ fontFamily: "Poppins_500Medium" }}>
+                  Forgot Password?
+                </Text>
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
-              onPress={gohome}
-              className="bg-[#1D3D78] mt-16 rounded-3xl py-3 items-center"
+              onPress={goHome}
+              className="bg-[#1D3D78] mt-14 rounded-3xl py-3 items-center"
             >
-              <Text className="text-white text-lg">Sign in</Text>
+              <Text
+                style={{ fontFamily: "Poppins_500Medium" }}
+                className="text-white text-lg"
+              >
+                Sign in
+              </Text>
             </TouchableOpacity>
           </View>
-          <Image
-            className="w-[160%] h-96 top-72 left-[-240]  object-cover"
-            source={require("../../assets/curve.png")}
-          />
         </>
       )}
+      <Image
+        className="w-[160%] h-96 bottom-0 top-[790px] left-[-240] absolute object-cover"
+        source={require("../../assets/curve.png")}
+      />
     </View>
   );
 };

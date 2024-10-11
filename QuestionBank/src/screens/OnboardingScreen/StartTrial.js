@@ -1,37 +1,25 @@
-import { useFonts, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { rMS, rS, rV } from "../../Responsive/responsive";
 import { useNavigation } from "@react-navigation/native";
 
 const StartTrail = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-   const handleBtn = () => {
-     navigation.navigate("SignUp");
-   };
-  
+  const handleBtn = () => {
+    navigation.navigate("SignUp");
+  };
+
   const handleCard = () => {
     navigation.navigate("Payment");
-  }
-    let [fontsLoaded] = useFonts({
-      Poppins_500Medium,
-      Poppins_700Bold,
-    });
-
-    if (!fontsLoaded) {
-      return null;
-    }
+  };
 
   return (
-    <View className=" items-center flex-1 justify-center bg-white">
+    <View
+      style={styles.container}
+      className=" items-center flex-1 justify-center bg-white"
+    >
       <Image
         source={require("../../assets/logo_3.png")}
         style={[styles.logo, { width: rS(200), height: rV(100) }]}
@@ -45,10 +33,16 @@ const StartTrail = () => {
           all the tools necessary to excel in your academic pursuits.
         </Text>
       </View>
-      <TouchableOpacity  onPress={handleCard} style={styles.card} className="shadow-2xl">
+      <TouchableOpacity
+        onPress={handleCard}
+        style={styles.card}
+        className="shadow-2xl"
+      >
         <View className="flex-row items-center">
           <MaterialCommunityIcons name="crown" color="#E36414" size={25} />
-          <Text className="" style={styles.cardText}>Premium</Text>
+          <Text className="" style={styles.cardText}>
+            Premium
+          </Text>
         </View>
         <Text style={styles.cardDescription} className="">
           Unlock access to get unlimited experience Unlimited past question
@@ -68,6 +62,11 @@ const StartTrail = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   logo: {
     marginTop: rMS(20),
   },

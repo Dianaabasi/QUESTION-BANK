@@ -7,10 +7,11 @@
     "icon": "./src/assets/logo_3.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/logo_3.png",
       "resizeMode": "contain",
       "backgroundColor": "#00327c"
     },
+    "scheme": "questionbank",
     "ios": {
       "supportsTablet": true
     },
