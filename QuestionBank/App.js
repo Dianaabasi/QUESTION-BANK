@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AppNavigation from "./src/navigations/AppNavigation";
+import StackNavigation from "./src/navigations/StackNavigation";
 import SplashScreen from "./src/screens/SplashScreen/Splash";
 import {
   useFonts,
@@ -11,6 +11,7 @@ import {
 
 export default function App() {
   const [isSplashScreen, setSplashScreen] = useState(true);
+
   let [fontsLoaded] = useFonts({
     Poppins_500Medium,
     Poppins_700Bold,
@@ -30,5 +31,5 @@ export default function App() {
     return null;
   }
 
-  return <>{isSplashScreen ? <SplashScreen /> : <AppNavigation />}</>;
+  return <>{isSplashScreen ? <SplashScreen /> : <StackNavigation />}</>;
 }

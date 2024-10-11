@@ -12,12 +12,23 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 const SignUpScreen = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  const [check, setCheck] = useState(false);
   const navigation = useNavigation();
   const goHome = () => {
     navigation.navigate("Tab");
   };
 
+  const PasswordSecure = () => {
+    setOpen(!open);
+  };
+
+  const checkbox = () => {
+    setCheck(!check);
+  };
+  const forgetPassword = () => {
+    navigation.navigate("ForgetPassword");
+  };
   return (
     <View className="flex-1">
       <View className=" mx-20 bg-slate-200 rounded-2xl flex-row p-1 mt-20 justify-around items-center shadow-2xl">
@@ -56,7 +67,7 @@ const SignUpScreen = () => {
         //signup from
         <>
           <View className=" mt-10 mx-8">
-            <View className="p mb-2">
+            <View className="mb-2">
               <Text
                 style={{ fontFamily: "Poppins_700Bold" }}
                 className="text-2xl"
@@ -102,13 +113,15 @@ const SignUpScreen = () => {
                 style={{ fontFamily: "Poppins_600SemiBold" }}
                 className="ml-2 text-lg flex-1 "
                 placeholder="Password"
-                secureTextEntry={true}
+                secureTextEntry={!open}
               />
-              <MaterialCommunityIcons
-                name="eye-outline"
-                color="black"
-                size={25}
-              />
+              <TouchableOpacity onPress={() => PasswordSecure()}>
+                <MaterialCommunityIcons
+                  name={!open ? "eye-off" : "eye-outline"}
+                  color="black"
+                  size={25}
+                />
+              </TouchableOpacity>
             </View>
             <View className="flex-row border-b-2 py-2 my-6 border-gray-500">
               <MaterialCommunityIcons
@@ -120,13 +133,15 @@ const SignUpScreen = () => {
                 style={{ fontFamily: "Poppins_600SemiBold" }}
                 className="ml-2 text-lg flex-1 "
                 placeholder="Comfrim Password"
-                secureTextEntry={true}
+                secureTextEntry={!open}
               />
-              <MaterialCommunityIcons
-                name="eye-outline"
-                color="black"
-                size={25}
-              />
+              <TouchableOpacity onPress={() => PasswordSecure()}>
+                <MaterialCommunityIcons
+                  name={!open ? "eye-off" : "eye-outline"}
+                  color="black"
+                  size={25}
+                />
+              </TouchableOpacity>
             </View>
 
             <TouchableOpacity
@@ -179,25 +194,32 @@ const SignUpScreen = () => {
                 style={{ fontFamily: "Poppins_600SemiBold" }}
                 className="ml-2 text-lg flex-1 "
                 placeholder="Password"
-                secureTextEntry={true}
+                secureTextEntry={!open}
               />
-              <MaterialCommunityIcons
-                name="eye-outline"
-                color="black"
-                size={25}
-              />
+              <TouchableOpacity onPress={() => PasswordSecure()}>
+                <MaterialCommunityIcons
+                  name={!open ? "eye-off" : "eye-outline"}
+                  color="black"
+                  size={25}
+                />
+              </TouchableOpacity>
             </View>
             <View className="flex-row mt-8 justify-between">
               <TouchableOpacity
-                onPress={() => setShowLoginForm(true)}
-                className="text-sm text-[#1D3D78] hover:text-[#F2F2F2]"
+                onPress={() => checkbox()}
+                className="text-sm flex-row items-center gap-1 text-[#1D3D78] hover:text-[#F2F2F2]"
               >
+                <MaterialCommunityIcons
+                  name={check ? "checkbox-marked" : "checkbox-blank-outline"}
+                  color="black"
+                  size={25}
+                />
                 <Text style={{ fontFamily: "Poppins_500Medium" }}>
                   Remember me
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => setShowLoginForm(false)}
+                onPress={() => forgetPassword()}
                 className="text-sm text-[#1D3D78] hover:text-[#F2F2F2]"
               >
                 <Text style={{ fontFamily: "Poppins_500Medium" }}>
@@ -220,7 +242,7 @@ const SignUpScreen = () => {
         </>
       )}
       <Image
-        className="w-[160%] h-96 bottom-0 top-[790px] left-[-240] absolute object-cover"
+        className="w-[160%] h-96 bottom-0 top-[770px] left-[-240] absolute object-cover"
         source={require("../../assets/curve.png")}
       />
     </View>

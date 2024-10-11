@@ -1,12 +1,10 @@
 import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-import SettingScreen from "../screens/SettingScreen/SettingScreen";
-import HomeScreen from "../screens/HomeScreen/HomeScreen";
+import { SettingScreen, HomeScreen } from "../components/Import";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const TabNavigation = () => {
+const BottomTabNavigation = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -41,4 +39,4 @@ const TabNavigation = () => {
   );
 };
 
-export default TabNavigation;
+export default BottomTabNavigation;
