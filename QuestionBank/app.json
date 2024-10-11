@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "QuestionBank",
+    "slug": "QuestionBank",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/logo_3.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#00327c"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/logo_3.png",
+        "backgroundColor": "#00327c"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
