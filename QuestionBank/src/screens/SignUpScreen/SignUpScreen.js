@@ -31,7 +31,7 @@ const SignUpScreen = () => {
   };
   return (
     <View className="flex-1">
-      <View className=" mx-20 bg-slate-200 rounded-2xl flex-row p-1 mt-20 justify-around items-center shadow-2xl">
+      <View className=" mx-16 bg-slate-200 rounded-2xl flex-row p-1 px-3 mt-20 justify-between items-center shadow-2xl">
         <TouchableOpacity
           onPress={() => setShowLoginForm(true)}
           className={`${
@@ -39,10 +39,9 @@ const SignUpScreen = () => {
           } p-3 px-8 rounded-xl shadow-2xl shadow-black`}
         >
           <Text
-            style={{ fontFamily: "Poppins_600SemiBold" }}
             className={`${
               showLoginForm ? "text-white" : "text-[#1D3D78]"
-            } text-base text-center`}
+            } text-base text-center font-[SemiBold]`}
           >
             Sign in
           </Text>
@@ -54,10 +53,9 @@ const SignUpScreen = () => {
           }  p-3 px-8 rounded-2xl shadow-2xl shadow-black`}
         >
           <Text
-            style={{ fontFamily: "Poppins_600SemiBold" }}
             className={`${
               showLoginForm ? "text-[#1D3D78]" : "text-white"
-            } text-base text-center`}
+            } text-base text-center font-[SemiBold]`}
           >
             Sign Up
           </Text>
@@ -68,13 +66,8 @@ const SignUpScreen = () => {
         <>
           <View className=" mt-10 mx-8">
             <View className="mb-2">
-              <Text
-                style={{ fontFamily: "Poppins_700Bold" }}
-                className="text-2xl"
-              >
-                Hello there,
-              </Text>
-              <Text style={{ fontFamily: "Poppins_500Medium" }}>
+              <Text className="text-3xl font-[Bold]">Hello there,</Text>
+              <Text className="font-[Medium] text-base">
                 Good to have you here
               </Text>
             </View>
@@ -86,8 +79,7 @@ const SignUpScreen = () => {
                 size={25}
               />
               <TextInput
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="ml-2 text-lg flex-1 "
+                className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Student Name"
               />
             </View>
@@ -98,8 +90,7 @@ const SignUpScreen = () => {
                 size={25}
               />
               <TextInput
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="ml-2 text-lg flex-1 "
+                className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Email"
               />
             </View>
@@ -110,8 +101,7 @@ const SignUpScreen = () => {
                 size={25}
               />
               <TextInput
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="ml-2 text-lg flex-1 "
+                className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Password"
                 secureTextEntry={!open}
               />
@@ -130,8 +120,7 @@ const SignUpScreen = () => {
                 size={25}
               />
               <TextInput
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="ml-2 text-lg flex-1 "
+                className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Comfrim Password"
                 secureTextEntry={!open}
               />
@@ -148,10 +137,7 @@ const SignUpScreen = () => {
               onPress={goHome}
               className="bg-[#1D3D78] mt-16 rounded-3xl py-3 items-center"
             >
-              <Text
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="text-white text-lg"
-              >
+              <Text className="text-white text-lg font-[SemiBold]">
                 Sign Up
               </Text>
             </TouchableOpacity>
@@ -162,15 +148,8 @@ const SignUpScreen = () => {
         <>
           <View className=" mt-10 mx-8">
             <View className="p mb-2">
-              <Text
-                style={{ fontFamily: "Poppins_700Bold" }}
-                className="text-2xl"
-              >
-                Welcome Back,
-              </Text>
-              <Text style={{ fontFamily: "Poppins_500Medium" }}>
-                Good to see again
-              </Text>
+              <Text className="text-3xl font-[Bold]">Welcome Back,</Text>
+              <Text className="font-[Medium] text-base">Good to see again</Text>
             </View>
             <View className="flex-row border-b-2 py-2 my-5 border-gray-500">
               <MaterialCommunityIcons
@@ -179,8 +158,7 @@ const SignUpScreen = () => {
                 size={25}
               />
               <TextInput
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="ml-2 text-lg flex-1 "
+                className="ml-2 text-lg flex-1 font-[SemiBold] "
                 placeholder="Email"
               />
             </View>
@@ -191,8 +169,7 @@ const SignUpScreen = () => {
                 size={25}
               />
               <TextInput
-                style={{ fontFamily: "Poppins_600SemiBold" }}
-                className="ml-2 text-lg flex-1 "
+                className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Password"
                 secureTextEntry={!open}
               />
@@ -207,37 +184,50 @@ const SignUpScreen = () => {
             <View className="flex-row mt-8 justify-between">
               <TouchableOpacity
                 onPress={() => checkbox()}
-                className="text-sm flex-row items-center gap-1 text-[#1D3D78] hover:text-[#F2F2F2]"
+                className="flex-row items-center gap-0.5"
               >
                 <MaterialCommunityIcons
                   name={check ? "checkbox-marked" : "checkbox-blank-outline"}
                   color="black"
-                  size={25}
+                  size={20}
                 />
-                <Text style={{ fontFamily: "Poppins_500Medium" }}>
-                  Remember me
-                </Text>
+                <Text className="font-[Medium]">Remember me</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => forgetPassword()}
                 className="text-sm text-[#1D3D78] hover:text-[#F2F2F2]"
               >
-                <Text style={{ fontFamily: "Poppins_500Medium" }}>
-                  Forgot Password?
-                </Text>
+                <Text className="font-[Medium]">Forgot Password?</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
               onPress={goHome}
-              className="bg-[#1D3D78] mt-14 rounded-3xl py-3 items-center"
+              className="bg-[#1D3D78] my-14 rounded-3xl py-3 items-center"
             >
-              <Text
-                style={{ fontFamily: "Poppins_500Medium" }}
-                className="text-white text-lg"
-              >
-                Sign in
-              </Text>
+              <Text className="text-white text-lg font-[Medium]">Sign in</Text>
             </TouchableOpacity>
+
+            <View className="flex-row items-center justify-center gap-2">
+              <View className=" w-8 bg-gray-500 h-0.5" />
+              <Text className="text-center text-base font-[Medium]">
+                Or continue with
+              </Text>
+              <View className="w-8 bg-gray-500 h-0.5" />
+            </View>
+
+            <View className="flex-row items-center justify-center mt-14 gap-x-10">
+              <TouchableOpacity className="flex-row items-center gap-2 justify-center h-12">
+                <Image
+                  className="w-5 h-5 object-cover"
+                  source={require("../../assets/google.jpeg")}
+                />
+                <Text className="text-xl font-[Medium]">Google</Text>
+              </TouchableOpacity>
+              <TouchableOpacity className="flex-row items-center justify-center h-12">
+                <MaterialCommunityIcons name="apple" color="black" size={25} />
+                <Text className="text-xl font-[Medium]">Apple</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </>
       )}

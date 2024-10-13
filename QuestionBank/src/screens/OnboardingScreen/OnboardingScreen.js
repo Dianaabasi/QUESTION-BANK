@@ -37,16 +37,10 @@ const Slides = ({ item }) => {
       />
 
       <View className="items-center text-center mb-48 flex-[0.4]">
-        <Text
-          style={{ fontFamily: "Poppins_600SemiBold" }}
-          className="text-3xl text-blue-950 mb-4"
-        >
+        <Text className="text-3xl text-blue-950 mb-4 font-[SemiBold]">
           {item.title}
         </Text>
-        <Text
-          style={{ fontFamily: "Poppins_500Medium" }}
-          className="text-lg text-center text-blue-950 mx-8"
-        >
+        <Text className="text-lg text-center text-blue-950 mx-8 font-[Medium]">
           {item.desc}
         </Text>
       </View>
@@ -92,19 +86,13 @@ const OnboardingScreen = () => {
               onPress={handleBtnSkip}
               className=" flex-1 mx-2 mr-10 p-4 items-center"
             >
-              <Text
-                style={{ color: "#A8A8A8", fontFamily: "Poppins_500Medium" }}
-              >
-                Skip
-              </Text>
+              <Text className="font-[SemiBold] text-[#A8A8A8]">Skip</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={gotToNxtSlide}
               className="flex-1 items-center p-4 bg-[#1D3D78] rounded-3xl mx-8"
             >
-              <Text style={{ color: "#fff", fontFamily: "Poppins_500Medium" }}>
-                Next
-              </Text>
+              <Text className="font-[Medium] text-white">Next</Text>
             </TouchableOpacity>
           </View>
         </View>

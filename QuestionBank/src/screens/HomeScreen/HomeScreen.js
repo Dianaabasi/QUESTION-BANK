@@ -87,7 +87,7 @@ const HomeScreen = () => {
         className="flex-row justify-between items-start rounded-xl mx-4 mb-0 mt-9"
       >
         <View className="mt-12 ml-7">
-          <Text className="mb-6 text-xl w-[150] font-bold">
+          <Text className="mb-6 text-xl w-[150] font-[SemiBold]">
             Fugiat laboris consequat ullamco quis
           </Text>
           <TouchableOpacity className="flex-row">
@@ -110,12 +110,7 @@ const HomeScreen = () => {
           className="w-10 h-10 rounded-full p-2 bg-slate-400"
           source={require("../../assets/user.png")}
         />
-        <Text
-          style={{ fontFamily: "Poppins_600SemiBold" }}
-          className="text-2xl"
-        >
-          Hello, Daniella
-        </Text>
+        <Text className="text-2xl font-[SemiBold]">Hello, Daniella</Text>
       </View>
       <View style={{ height: 360 }}>
         <FlatList
@@ -142,12 +137,7 @@ const HomeScreen = () => {
             return (
               <TouchableOpacity className="flex-1 justify-between bg-white p-12 m-2 items-center rounded-2xl shadow-2xl ">
                 <Image className="w-16 h-16 mb-2" source={item.icon} />
-                <Text
-                  style={{ fontFamily: "Poppins_600SemiBold" }}
-                  className="mt-1 mb-0"
-                >
-                  {item.title}
-                </Text>
+                <Text className="mt-1 mb-0 font-[SemiBold]">{item.title}</Text>
               </TouchableOpacity>
             );
           }}

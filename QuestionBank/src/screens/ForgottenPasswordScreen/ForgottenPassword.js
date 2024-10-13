@@ -14,46 +14,33 @@ const ForgottenPassword = () => {
   };
   return (
     <SafeAreaView className="bg-white flex-1">
-      <View className="mt-10 mx-8">
-        <TouchableOpacity onPress={goBack} className="my-10">
+      <View className="py-8">
+        <TouchableOpacity onPress={goBack} className="px-6">
           <MaterialCommunityIcons name="chevron-left" color="#000" size={35} />
         </TouchableOpacity>
-        <View className="my-10">
-          <Text
-            className="text-3xl mb-2"
-            style={{ fontFamily: "Poppins_700Bold" }}
-          >
-            Forgot Password
+        <View className="mx-8 mt-24">
+          <Text className="text-3xl mb-2 font-[Bold]">Forgot Password?</Text>
+          <Text className="text-base font-[Medium]">
+            Don't worry! It happens, please enter the email associated with your
+            account and we'll send a code to reset your Password
           </Text>
-          <Text
-            className="text-base"
-            style={{ fontFamily: "Poppins_600SemiBold" }}
-          >
-            Fill in your email and we'll send a to reset your Password
-          </Text>
-        </View>
-        <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
-          <MaterialCommunityIcons
-            name="email-outline"
-            color="black"
-            size={25}
-          />
-          <TextInput
-            style={{ fontFamily: "Poppins_600SemiBold" }}
-            className="ml-2 text-lg flex-1 "
-            placeholder="Email"
-          />
+          <View className="flex-row border-b-2 py-2 my-24 border-gray-500">
+            <MaterialCommunityIcons
+              name="email-outline"
+              color="black"
+              size={25}
+            />
+            <TextInput
+              className="ml-2 text-lg flex-1 font-[SemiBold] "
+              placeholder="Email"
+            />
+          </View>
         </View>
         <TouchableOpacity
           onPress={goPasswordVer}
-          className="bg-[#1D3D78] mt-14 rounded-3xl py-3 items-center"
+          className="bg-[#1D3D78] mt-14 mx-5 rounded-3xl py-3 items-center"
         >
-          <Text
-            style={{ fontFamily: "Poppins_500Medium" }}
-            className="text-white text-lg"
-          >
-            Send Code
-          </Text>
+          <Text className="text-white text-lg font-[Medium]">Send Code</Text>
         </TouchableOpacity>
       </View>
       <Image
