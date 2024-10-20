@@ -1,25 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Modal,
-  Switch,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Switch, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemeContext } from "../../context/ThemeContext";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Animatable from "react-native-animatable";
 
 const SettingScreen = () => {
-  const { isDarkTheme, setIsDarkTheme } = useContext(ThemeContext);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const { colors } = useTheme();
   const nav = useNavigation();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   useEffect(() => {
     loadSettings();
@@ -27,17 +18,12 @@ const SettingScreen = () => {
 
   const loadSettings = async () => {
     try {
-      const darkModeValue = await AsyncStorage.getItem("isDarkTheme");
-      if (darkModeValue !== null) {
-        setIsDarkTheme(JSON.parse(darkModeValue));
+      const notificationsValue = await AsyncStorage.getItem(
+        "notificationsEnabled"
+      );
+      if (notificationsValue !== null) {
+        setNotificationsEnabled(JSON.parse(notificationsValue));
       }
-
-      // const notificationsValue = await AsyncStorage.getItem(
-      //   "notificationsEnabled"
-      // );
-      // if (notificationsValue !== null) {
-      //   setNotificationsEnabled(JSON.parse(notificationsValue));
-      // }
     } catch (error) {
       console.error("Error loading settings:", error);
     }
@@ -51,61 +37,38 @@ const SettingScreen = () => {
     }
   };
 
-  const toggleDarkMode = async () => {
-    const newValue = !isDarkTheme;
-    setIsDarkTheme(newValue);
-    await saveSetting("isDarkTheme", newValue);
-  };
+  const toggleNotifications = async () => {
+    const newValue = !notificationsEnabled;
+    setNotificationsEnabled(newValue);
+    await saveSetting("notificationsEnabled", newValue);
 
-  const goToAccount = () => {
-    nav.navigate("AccountSetting");
+    // Simulate notification service update
+    console.log(`Notifications ${newValue ? "enabled" : "disabled"}`);
   };
-  const goToNotification = () => {
-    nav.navigate("Notification");
-  };
-  const goTosignOut = () => {};
-  const goToManageAddress = () => {};
-  const goToHelpCenter = () => {};
-
-  const profileItems = [
-    {
-      icon: "person-outline",
-      text: "Account",
-      action: goToAccount,
-      type: "link",
-    },
+  const notificationItems = [
     {
       icon: "notifications-outline",
-      text: "Notification",
-      action: goToNotification,
-      type: "link",
-    },
-    {
-      icon: "moon-outline",
-      text: "Dark Mode",
-      action: toggleDarkMode,
+      text: "Push Notification",
+      action: toggleNotifications,
       type: "toggle",
     },
     {
-      icon: "help-circle-outline",
-      text: "Help & Support",
-      action: goToHelpCenter,
+      icon: "notifications-outline",
+      text: "Email Notification",
+      action: toggleNotifications,
+      type: "toggle",
     },
     {
-      icon: "log-out-outline",
-      text: "LogOut",
-      action: goTosignOut,
-      textColor: "red",
-      iconColor: "red",
+      icon: "document-text-outline",
+      text: "Weekly Newsletter",
+      action: toggleNotifications,
+      type: "toggle",
     },
   ];
 
   return (
-    <SafeAreaView
-      className="flex-1"
-      style={{ backgroundColor: colors.background }}
-    >
-      {profileItems.map((item, index) => (
+    <SafeAreaView style={{ backgroundColor: colors.background }}>
+      {notificationItems.map((item, index) => (
         <Animatable.View
           key={index}
           animation="fadeInUp"
@@ -137,11 +100,11 @@ const SettingScreen = () => {
               {item.type === "toggle" && (
                 <Switch
                   trackColor={{ false: "#767577", true: "#81b0ff" }}
-                  thumbColor={!isDarkTheme ? "#171717" : "#f4f3f4"}
+                  thumbColor={notificationsEnabled ? "#f4f3f4" : "#171717"}
                   ios_backgroundColor="#3e3e3e"
-                  onValueChange={toggleDarkMode}
-                  value={isDarkTheme}
-                  accessibilityLabel="Toggle Dark Mode"
+                  onValueChange={toggleNotifications}
+                  value={notificationsEnabled}
+                  accessibilityLabel="Toggle Notifications"
                 />
               )}
               {item.type === "link" && (
@@ -155,11 +118,6 @@ const SettingScreen = () => {
           </TouchableOpacity>
         </Animatable.View>
       ))}
-      {/* <Modal transparent>
-        <View>
-          <Text>gcghcgvcghxkfh</Text>
-        </View>
-      </Modal> */}
     </SafeAreaView>
   );
 };
@@ -169,7 +127,6 @@ export default SettingScreen;
 const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
-    // borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

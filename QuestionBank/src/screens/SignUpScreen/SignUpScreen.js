@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const SignUpScreen = () => {
@@ -15,14 +15,14 @@ const SignUpScreen = () => {
   const [open, setOpen] = useState(false);
   const [check, setCheck] = useState(false);
   const navigation = useNavigation();
+  const { colors } = useTheme();
+
   const goHome = () => {
     navigation.navigate("Tab");
   };
-
   const PasswordSecure = () => {
     setOpen(!open);
   };
-
   const checkbox = () => {
     setCheck(!check);
   };
@@ -31,26 +31,32 @@ const SignUpScreen = () => {
   };
   return (
     <View className="flex-1">
-      <View className=" mx-16 bg-slate-200 rounded-2xl flex-row p-1 px-3 mt-20 justify-between items-center shadow-2xl">
+      <View
+        style={{ backgroundColor: colors.box }}
+        className=" mx-16 rounded-2xl flex-row p-1 px-3 mt-20 justify-between items-center shadow-2xl"
+      >
         <TouchableOpacity
           onPress={() => setShowLoginForm(true)}
-          className={`${
-            showLoginForm ? "bg-[#1D3D78]" : "bg-white"
-          } p-3 px-8 rounded-xl shadow-2xl shadow-black`}
+          style={{
+            backgroundColor: showLoginForm ? "#1D3D78" : colors.background,
+          }}
+          className="p-3 px-8 rounded-xl shadow-2xl"
         >
           <Text
-            className={`${
-              showLoginForm ? "text-white" : "text-[#1D3D78]"
-            } text-base text-center font-[SemiBold]`}
+            style={{
+              color: !showLoginForm ? "#1D3D78" : "#FFFFFD",
+            }}
+            className="text-base text-center font-[SemiBold]"
           >
             Sign in
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setShowLoginForm(false)}
-          className={`${
-            !showLoginForm ? "bg-[#1D3D78]" : "bg-white"
-          }  p-3 px-8 rounded-2xl shadow-2xl shadow-black`}
+          style={{
+            backgroundColor: showLoginForm ? colors.background : "#1D3D78",
+          }}
+          className="p-3 px-8 rounded-2xl shadow-2xl"
         >
           <Text
             className={`${
@@ -66,8 +72,16 @@ const SignUpScreen = () => {
         <>
           <View className=" mt-10 mx-8">
             <View className="mb-2">
-              <Text className="text-3xl font-[Bold]">Hello there,</Text>
-              <Text className="font-[Medium] text-base">
+              <Text
+                style={{ color: colors.text }}
+                className="text-3xl font-[Bold]"
+              >
+                Hello there,
+              </Text>
+              <Text
+                style={{ color: colors.text }}
+                className="font-[Medium] text-base"
+              >
                 Good to have you here
               </Text>
             </View>
@@ -75,10 +89,12 @@ const SignUpScreen = () => {
             <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
               <MaterialCommunityIcons
                 name="account-outline"
-                color="black"
+                color={colors.text}
                 size={25}
               />
               <TextInput
+                style={{ color: colors.text }}
+                placeholderTextColor={colors.text}
                 className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Student Name"
               />
@@ -86,10 +102,12 @@ const SignUpScreen = () => {
             <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
               <MaterialCommunityIcons
                 name="email-outline"
-                color="black"
+                color={colors.text}
                 size={25}
               />
               <TextInput
+                style={{ color: colors.text }}
+                placeholderTextColor={colors.text}
                 className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Email"
               />
@@ -97,18 +115,20 @@ const SignUpScreen = () => {
             <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
               <MaterialCommunityIcons
                 name="lock-outline"
-                color="black"
+                color={colors.text}
                 size={25}
               />
               <TextInput
+                style={{ color: colors.text }}
                 className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Password"
+                placeholderTextColor={colors.text}
                 secureTextEntry={!open}
               />
               <TouchableOpacity onPress={() => PasswordSecure()}>
                 <MaterialCommunityIcons
                   name={!open ? "eye-off" : "eye-outline"}
-                  color="black"
+                  color={colors.text}
                   size={25}
                 />
               </TouchableOpacity>
@@ -116,10 +136,12 @@ const SignUpScreen = () => {
             <View className="flex-row border-b-2 py-2 my-6 border-gray-500">
               <MaterialCommunityIcons
                 name="lock-outline"
-                color="black"
+                color={colors.text}
                 size={25}
               />
               <TextInput
+                style={{ color: colors.text }}
+                placeholderTextColor={colors.text}
                 className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Comfrim Password"
                 secureTextEntry={!open}
@@ -127,7 +149,7 @@ const SignUpScreen = () => {
               <TouchableOpacity onPress={() => PasswordSecure()}>
                 <MaterialCommunityIcons
                   name={!open ? "eye-off" : "eye-outline"}
-                  color="black"
+                  color={colors.text}
                   size={25}
                 />
               </TouchableOpacity>
@@ -148,16 +170,28 @@ const SignUpScreen = () => {
         <>
           <View className=" mt-10 mx-8">
             <View className="p mb-2">
-              <Text className="text-3xl font-[Bold]">Welcome Back,</Text>
-              <Text className="font-[Medium] text-base">Good to see again</Text>
+              <Text
+                style={{ color: colors.text }}
+                className="text-3xl font-[Bold]"
+              >
+                Welcome Back,
+              </Text>
+              <Text
+                style={{ color: colors.text }}
+                className="font-[Medium] text-base"
+              >
+                Good to see again
+              </Text>
             </View>
             <View className="flex-row border-b-2 py-2 my-5 border-gray-500">
               <MaterialCommunityIcons
                 name="email-outline"
-                color="black"
+                color={colors.text}
                 size={25}
               />
               <TextInput
+                style={{ color: colors.text }}
+                placeholderTextColor={colors.text}
                 className="ml-2 text-lg flex-1 font-[SemiBold] "
                 placeholder="Email"
               />
@@ -165,10 +199,12 @@ const SignUpScreen = () => {
             <View className="flex-row border-b-2 py-2 my-5 border-gray-500">
               <MaterialCommunityIcons
                 name="lock-outline"
-                color="black"
+                color={colors.text}
                 size={25}
               />
               <TextInput
+                style={{ color: colors.text }}
+                placeholderTextColor={colors.text}
                 className="ml-2 text-lg flex-1 font-[SemiBold]"
                 placeholder="Password"
                 secureTextEntry={!open}
@@ -176,7 +212,7 @@ const SignUpScreen = () => {
               <TouchableOpacity onPress={() => PasswordSecure()}>
                 <MaterialCommunityIcons
                   name={!open ? "eye-off" : "eye-outline"}
-                  color="black"
+                  color={colors.text}
                   size={25}
                 />
               </TouchableOpacity>
@@ -188,28 +224,35 @@ const SignUpScreen = () => {
               >
                 <MaterialCommunityIcons
                   name={check ? "checkbox-marked" : "checkbox-blank-outline"}
-                  color="black"
+                  color={colors.text}
                   size={20}
                 />
-                <Text className="font-[Medium]">Remember me</Text>
+                <Text style={{ color: colors.text }} className="font-[Medium]">
+                  Remember me
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => forgetPassword()}
                 className="text-sm text-[#1D3D78] hover:text-[#F2F2F2]"
               >
-                <Text className="font-[Medium]">Forgot Password?</Text>
+                <Text style={{ color: colors.text }} className="font-[Medium]">
+                  Forgot Password?
+                </Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
               onPress={goHome}
               className="bg-[#1D3D78] my-14 rounded-3xl py-3 items-center"
             >
-              <Text className="text-white text-lg font-[Medium]">Sign in</Text>
+              <Text className="text-lg text-white font-[Medium]">Sign in</Text>
             </TouchableOpacity>
 
             <View className="flex-row items-center justify-center gap-2">
               <View className=" w-8 bg-gray-500 h-0.5" />
-              <Text className="text-center text-base font-[Medium]">
+              <Text
+                style={{ color: colors.text }}
+                className="text-center text-base font-[Medium]"
+              >
                 Or continue with
               </Text>
               <View className="w-8 bg-gray-500 h-0.5" />
@@ -221,18 +264,28 @@ const SignUpScreen = () => {
                   className="w-5 h-5 object-cover"
                   source={require("../../assets/google.jpeg")}
                 />
-                <Text className="text-xl font-[Medium]">Google</Text>
+                <Text
+                  style={{ color: colors.text }}
+                  className="text-xl font-[Medium]"
+                >
+                  Google
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity className="flex-row items-center justify-center h-12">
                 <MaterialCommunityIcons name="apple" color="black" size={25} />
-                <Text className="text-xl font-[Medium]">Apple</Text>
+                <Text
+                  style={{ color: colors.text }}
+                  className="text-xl font-[Medium]"
+                >
+                  Apple
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
         </>
       )}
       <Image
-        className="w-[160%] h-96 bottom-0 top-[770px] left-[-240] absolute object-cover"
+        className="w-[160%] h-96 bottom-0 top-[780px] left-[-240] absolute object-cover"
         source={require("../../assets/curve.png")}
       />
     </View>

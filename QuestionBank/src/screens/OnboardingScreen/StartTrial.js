@@ -2,10 +2,11 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { rMS, rS, rV } from "../../Responsive/responsive";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 const StartTrail = () => {
   const navigation = useNavigation();
+  const { colors } = useTheme();
 
   const handleBtn = () => {
     navigation.navigate("SignUp");
@@ -16,7 +17,7 @@ const StartTrail = () => {
   };
 
   return (
-    <View className=" items-center flex-1 justify-center bg-white">
+    <View className=" items-center flex-1 justify-center">
       <Image
         source={require("../../assets/logo_3.png")}
         style={[styles.logo, { width: rS(200), height: rV(100) }]}
@@ -41,8 +42,7 @@ const StartTrail = () => {
       </View>
       <TouchableOpacity
         onPress={handleCard}
-        style={styles.card}
-        className="shadow-gray-950"
+        style={[styles.card, { backgroundColor: colors.background }]}
       >
         <View className="flex-row items-center">
           <MaterialCommunityIcons name="crown" color="#E36414" size={25} />
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     marginBottom: rMS(30),
   },
   card: {
-    backgroundColor: "whitesmoke",
     borderRadius: 15,
     padding: rMS(24),
     flexDirection: "column",
@@ -102,6 +101,14 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 30,
     marginHorizontal: 14,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 6,
   },
   cardText: {
     fontSize: rMS(15),

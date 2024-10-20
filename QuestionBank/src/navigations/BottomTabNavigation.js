@@ -1,21 +1,49 @@
-import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { SettingScreen, HomeScreen } from "../components/Import";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { SettingScreen, HomeScreen } from "../components/ScreenImport";
+import { useTheme, useNavigation } from "@react-navigation/native";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { View, Text, TouchableOpacity } from "react-native";
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = () => {
+  const { colors } = useTheme();
+  const nav = useNavigation();
+  const goBack = () => {
+    nav.goBack();
+  };
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#01386e"
-      barStyle={{ backgroundColor: "transparent" }}
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#01386e",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          padding: 8,
+          height: 65,
+          backgroundColor: colors.background,
+        },
+        tabBarShowLabel: false,
+      }}
     >
       <Tab.Screen
         options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <>
+              <MaterialIcons name="home" size={30} color={color} />
+              {focused && (
+                <Text
+                  className="font-[Medium]"
+                  style={{
+                    marginLeft: 5,
+                    color: focused ? "#01386e" : "gray",
+                  }}
+                >
+                  Home
+                </Text>
+              )}
+            </>
           ),
         }}
         name="Home"
@@ -23,16 +51,36 @@ const BottomTabNavigation = () => {
       />
       <Tab.Screen
         options={{
-          tabBarLabel: "Settings",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-settings-outline"
-              color={color}
-              size={26}
-            />
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: "#1D3D78",
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack} className="ml-2">
+              <MaterialIcons name="chevron-left" size={30} color="white" />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            color: "white",
+          },
+          tabBarIcon: ({ focused, color, size }) => (
+            <>
+              <MaterialIcons name="settings" size={30} color={color} />
+              {focused && (
+                <Text
+                  className="font-[Medium]"
+                  style={{
+                    marginLeft: 5,
+                    color: focused ? "#01386e" : "gray",
+                  }}
+                >
+                  Settings
+                </Text>
+              )}
+            </>
           ),
         }}
-        name="Settings"
+        name="Setting"
         component={SettingScreen}
       />
     </Tab.Navigator>

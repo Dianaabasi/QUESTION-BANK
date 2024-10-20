@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Subject = () => {
+const Lists = () => {
   return (
     <View>
-      <Text>Subject</Text>
+      <Text>Lists</Text>
     </View>
   );
 };
 
-export default Subject;
+export default Lists;

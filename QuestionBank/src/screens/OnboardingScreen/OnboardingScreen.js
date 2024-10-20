@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { rMS, rS, rV } from "../../Responsive/responsive";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -52,7 +52,7 @@ const OnboardingScreen = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [contentOffsetX, setContentOffsetX] = useState(0);
   const navigation = useNavigation();
-
+  const { colors } = useTheme();
   const handleBtnSkip = () => {
     navigation.navigate("StartTrial");
   };
@@ -61,24 +61,26 @@ const OnboardingScreen = () => {
   const Pagination = () => {
     return (
       <View style={{ height: height * 0.25 }} className="py-2 justify-between">
-        <View className="flex-row justify-center mt-10">
+        <View className="flex-row gap-x-1 justify-center mt-10">
           {data.map((_, index) => (
             <View
               style={[
+                { backgroundColor: colors.dots },
                 currentSlideIndex === index && {
                   backgroundColor: "#1D3D78",
-                  borderColor: "#64748b",
-                  borderWidth: 1,
-                  width: 13,
+                  width: 16,
                   height: 13,
                   borderRadius: 10,
                 },
               ]}
               key={index}
-              className="h-3 mr-0.5 rounded-full w-3 bg-slate-500"
+              className="h-3 mr-0.5 rounded-full w-3"
             />
           ))}
-          <View className="w-3 h-3 rounded-full bg-slate-500" />
+          <View
+            style={{ backgroundColor: colors.dots }}
+            className="w-3 h-3 rounded-full"
+          />
         </View>
         <View className="mb-8">
           <View className="flex-row">

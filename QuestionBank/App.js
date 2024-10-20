@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import StackNavigation from "./src/navigations/StackNavigation";
 import SplashScreen from "./src/screens/SplashScreen/Splash";
+import { ThemeContext } from "./src/context/ThemeContext";
+import { StatusBar } from "react-native";
 import {
   useFonts,
   Poppins_500Medium as Medium,
@@ -8,10 +10,17 @@ import {
   Poppins_400Regular as Regular,
   Poppins_600SemiBold as SemiBold,
 } from "@expo-google-fonts/poppins";
+import DarkTheme from "./src/theme/DarkTheme";
+import LightTheme from "./src/theme/LightTheme";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   const [isSplashScreen, setSplashScreen] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
+  const themeContext = useMemo(() => {
+    return { isDarkTheme, setIsDarkTheme };
+  });
   let [fontsLoaded] = useFonts({
     Medium,
     Bold,
@@ -31,5 +40,11 @@ export default function App() {
     return null;
   }
 
-  return <>{isSplashScreen ? <SplashScreen /> : <StackNavigation />}</>;
+  return (
+    <NavigationContainer theme={isDarkTheme ? DarkTheme : LightTheme}>
+      <ThemeContext.Provider value={themeContext}>
+        {isSplashScreen ? <SplashScreen /> : <StackNavigation />}
+      </ThemeContext.Provider>
+    </NavigationContainer>
+  );
 }

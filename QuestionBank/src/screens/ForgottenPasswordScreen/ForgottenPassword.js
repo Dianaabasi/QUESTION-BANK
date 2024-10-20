@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 const ForgottenPassword = () => {
   const navigation = useNavigation();
@@ -12,8 +12,9 @@ const ForgottenPassword = () => {
   const goPasswordVer = () => {
     navigation.navigate("PasswordVer");
   };
+  const { colors } = useTheme();
   return (
-    <SafeAreaView className="bg-white flex-1">
+    <SafeAreaView className="flex-1">
       <View className="py-8">
         <TouchableOpacity onPress={goBack} className="px-6">
           <MaterialCommunityIcons name="chevron-left" color="#000" size={35} />
@@ -44,7 +45,7 @@ const ForgottenPassword = () => {
         </TouchableOpacity>
       </View>
       <Image
-        className="w-[160%] h-96 bottom-0 top-[770px] left-[-240] absolute object-cover"
+        className="w-[160%] h-96 bottom-0 top-[780px] left-[-240] absolute object-cover"
         source={require("../../assets/curve.png")}
       />
     </SafeAreaView>

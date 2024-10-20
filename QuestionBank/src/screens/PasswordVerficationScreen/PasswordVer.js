@@ -14,7 +14,7 @@ const PasswordVer = () => {
     navigation.navigate("ResetPassword");
   };
   const [otpSent, setOtpSent] = useState(false);
-  const [countdown, setCountdown] = useState(60); // 60 seconds countdown
+  const [countdown, setCountdown] = useState(12); // 60 seconds countdown
   const [intervalId, setIntervalId] = useState(null);
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const PasswordVer = () => {
         </TouchableOpacity>
       </View>
       <Image
-        className="w-[160%] h-96 bottom-0 top-[770px] left-[-240] absolute object-cover"
+        className="w-[160%] h-96 bottom-0 top-[780px] left-[-240] absolute object-cover"
         source={require("../../assets/curve.png")}
       />
     </SafeAreaView>
