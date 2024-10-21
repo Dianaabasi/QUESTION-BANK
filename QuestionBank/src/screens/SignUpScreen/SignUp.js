@@ -18,11 +18,6 @@ const SignUp = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();
 
-  const signUp = () => {
-    //console.log("Signing up with:", studentName, email, password);
-    ToastAndroid.show("Registration successful", ToastAndroid.LONG);
-    navigation.navigate("Tab");
-  };
   const PasswordSecure = () => {
     setOpen(!open);
   };
@@ -141,7 +136,7 @@ const SignUp = () => {
               )}
             </View>
 
-            <View className="flex-row border-b-2 py-2 my-7 border-gray-500">
+            <View className="flex-row items-center border-b-2 py-2 my-7 border-gray-500">
               <MaterialCommunityIcons
                 name="lock-outline"
                 color={colors.text}
@@ -202,8 +197,11 @@ const SignUp = () => {
             </View>
 
             <TouchableOpacity
+              disabled={!isValid}
               onPress={handleSubmit}
-              className="bg-[#1D3D78] mt-16 rounded-3xl py-3 items-center"
+              className={`bg-[#1D3D78] mt-16 rounded-3xl py-3 items-center ${
+                !isValid ? "opacity-50" : ""
+              }`}
             >
               <Text className="text-white text-lg font-[SemiBold]">
                 Sign Up

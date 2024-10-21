@@ -30,22 +30,27 @@ const PaymentCard = () => {
     if (event.type === "set") {
       const currentDate = selecteDate || date;
       setDate(currentDate);
-      const formattedDate = currentDate.toLocaleString("en-US", {
-        year: "numeric",
-        month: "long",
-      });
-      console.log(formattedDate);
     }
     setShowPicker(false);
   };
 
   const formatDate = (date) => {
     if (!date) return "";
-    const year = date.getFullYear();
-    const month = date.toLocaleString("default", { month: "long" });
-    return `${month} ${year}`;
+
+    // Get the month as a number (1-12)
+    const monthNumber = date.getMonth() + 1;
+
+    // Format the month as MM
+    const monthFormatted = monthNumber.toString().padStart(2, "0");
+
+    // Get the year as a two-digit number
+    const year = date.getFullYear() % 100; // This gives us the last two digits of the year
+
+    // Return the formatted date string
+    return `${monthFormatted}/${year}`;
   };
 
+  console.log(formatDate(date));
   return (
     <SafeAreaView className="flex-1">
       <TouchableOpacity onPress={goBack} className=" mx-7 my-8">
@@ -61,7 +66,7 @@ const PaymentCard = () => {
 
         <View className="w-70 flex-row items-center px-5 h-14 justify-between border rounded-lg border-gray-400">
           <TextInput
-            //value=""
+            value=""
             className="flex-1 text-xl"
             placeholder="5553-XXXX-3567-XXXX-288"
             keyboardType="number-pad"
@@ -93,7 +98,7 @@ const PaymentCard = () => {
               {showPicker && (
                 <DateTimePicker
                   value={date || new Date()}
-                  mode={"month"}
+                  mode={"date"}
                   display={"spinner"}
                   onChange={handleDateChange}
                 />
