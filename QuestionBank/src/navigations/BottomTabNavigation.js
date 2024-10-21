@@ -10,7 +10,7 @@ const BottomTabNavigation = () => {
   const { colors } = useTheme();
   const nav = useNavigation();
   const goBack = () => {
-    nav.goBack();
+    nav.navigate("Tab");
   };
   return (
     <Tab.Navigator

@@ -6,6 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  Modal,
+  Image,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -33,6 +35,7 @@ const UTMESubject = () => {
   const { colors } = useTheme();
   const nav = useNavigation();
   const [selectedSubjects, setSelectedSubjects] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
   const [check, setCheck] = useState(false);
 
   const handleSubjectSelect = (subjectId) => {
@@ -40,6 +43,9 @@ const UTMESubject = () => {
   };
   const checkbox = () => {
     setCheck(!check);
+  };
+  const hideModal = () => {
+    setModalVisible(false);
   };
   return (
     <View className="flex-1">
@@ -72,12 +78,57 @@ const UTMESubject = () => {
         keyExtractor={(item) => item.id}
       />
       <View className="mx-9 my-4">
-        <TouchableOpacity className="bg-[#1D3D78] p-3 items-center justify-center rounded-3xl">
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          className="bg-[#1D3D78] p-3 items-center justify-center rounded-3xl"
+        >
           <Text className="font-[SemiBold] uppercase text-base text-white">
             Continue
           </Text>
         </TouchableOpacity>
       </View>
+      <Modal
+        statusBarTranslucent
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={hideModal}
+      >
+        <View
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+          className="flex-1 justify-center items-center"
+        >
+          <View
+            style={{ backgroundColor: colors.background }}
+            className="w-[70%] rounded-2xl p-5"
+          >
+            <View className="items-center justify-center my-5">
+              <Image
+                style={{
+                  width: 200,
+                  height: 200,
+                  resizeMode: "contain",
+                }}
+                source={require("../../assets/alert.png")}
+              />
+            </View>
+            <Text
+              className="font-[Medium] text-base text-center"
+              style={{ color: colors.text }}
+            >
+              Select not more that than 4 subject.
+            </Text>
+            <TouchableOpacity
+              onPress={hideModal}
+              className="bg-[#1D3D78] my-4 p-3 mx-3 rounded-3xl"
+            >
+              <Text className="text-white font-[Medium] text-center">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };

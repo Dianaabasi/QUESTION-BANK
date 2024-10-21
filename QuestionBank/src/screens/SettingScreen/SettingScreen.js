@@ -6,6 +6,7 @@ import {
   Switch,
   StyleSheet,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeContext } from "../../context/ThemeContext";
@@ -18,6 +19,7 @@ import * as Animatable from "react-native-animatable";
 const SettingScreen = () => {
   const { isDarkTheme, setIsDarkTheme } = useContext(ThemeContext);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const { colors } = useTheme();
   const nav = useNavigation();
 
@@ -63,7 +65,15 @@ const SettingScreen = () => {
   const goToNotification = () => {
     nav.navigate("Notification");
   };
-  const goTosignOut = () => {};
+  const goTosignOut = () => {
+    setModalVisible(true);
+  };
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+  const signOut = () => {
+    nav.navigate("SignUp");
+  };
   const goToManageAddress = () => {};
   const goToHelpCenter = () => {};
 
@@ -155,11 +165,57 @@ const SettingScreen = () => {
           </TouchableOpacity>
         </Animatable.View>
       ))}
-      {/* <Modal transparent>
-        <View>
-          <Text>gcghcgvcghxkfh</Text>
+      <Modal
+        statusBarTranslucent
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={hideModal}
+      >
+        <View
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+          className="flex-1 justify-center items-center"
+        >
+          <View
+            style={{ backgroundColor: colors.background }}
+            className="w-[70%] rounded-2xl p-5"
+          >
+            <View className="items-center justify-center my-5">
+              <Image
+                style={{
+                  width: 100,
+                  height: 100,
+                  resizeMode: "contain",
+                }}
+                source={require("../../assets/close.png")}
+              />
+            </View>
+            <Text
+              className="font-[Medium] text-base text-center"
+              style={{ color: colors.text }}
+            >
+              Are you sure you want to log out your account?
+            </Text>
+            <TouchableOpacity
+              onPress={hideModal}
+              className="bg-slate-400 my-4 p-3 mx-5 rounded-3xl"
+            >
+              <Text className="text-white font-[Medium] text-center">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className="bg-red-500 mb-4 p-3 mx-5 rounded-3xl"
+              onPress={signOut}
+            >
+              <Text className="text-white font-[Medium] text-center">
+                Log Out
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </Modal> */}
+      </Modal>
     </SafeAreaView>
   );
 };

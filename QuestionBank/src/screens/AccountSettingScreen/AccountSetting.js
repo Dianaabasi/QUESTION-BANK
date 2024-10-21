@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  Image,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -9,6 +16,7 @@ import * as Animatable from "react-native-animatable";
 const AccountSetting = () => {
   const nav = useNavigation();
   const { colors } = useTheme();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const goPasswordChange = () => {
     nav.navigate("PasswordChange");
@@ -17,7 +25,12 @@ const AccountSetting = () => {
     nav.navigate("AddPayment");
   };
   const handleDelete = () => {};
-
+  const showModal = () => {
+    setModalVisible(true);
+  };
+  const hideModal = () => {
+    setModalVisible(false);
+  };
   const accountItems = [
     {
       icon: "lock-closed-outline",
@@ -34,7 +47,7 @@ const AccountSetting = () => {
     {
       icon: "log-out-outline",
       text: "Delete Account",
-      action: handleDelete,
+      action: showModal,
       textColor: "red",
       iconColor: "red",
     },
@@ -84,6 +97,57 @@ const AccountSetting = () => {
           </TouchableOpacity>
         </Animatable.View>
       ))}
+      <Modal
+        statusBarTranslucent
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={hideModal}
+      >
+        <View
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+          className="flex-1 justify-center items-center"
+        >
+          <View
+            style={{ backgroundColor: colors.background }}
+            className="w-[70%] rounded-2xl p-5"
+          >
+            <View className="items-center justify-center my-5">
+              <Image
+                style={{
+                  width: 100,
+                  height: 100,
+                  resizeMode: "contain",
+                }}
+                source={require("../../assets/close.png")}
+              />
+            </View>
+            <Text
+              className="font-[Medium] text-base text-center"
+              style={{ color: colors.text }}
+            >
+              Are you sure you want to Delete your account?
+            </Text>
+            <TouchableOpacity
+              onPress={hideModal}
+              className="bg-slate-400 my-4 p-3 mx-5 rounded-3xl"
+            >
+              <Text className="text-white font-[Medium] text-center">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className="bg-red-500 mb-4 p-3 mx-5 rounded-3xl"
+              onPress={handleDelete}
+            >
+              <Text className="text-white font-[Medium] text-center">
+                Delete Account
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
