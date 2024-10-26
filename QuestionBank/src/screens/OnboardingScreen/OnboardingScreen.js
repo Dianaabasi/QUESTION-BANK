@@ -9,6 +9,7 @@ import {
 import React, { useRef, useState } from "react";
 import { rMS, rS, rV } from "../../Responsive/responsive";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -30,7 +31,12 @@ const data = [
 const Slides = ({ item }) => {
   return (
     <View className="items-center" style={{ width, height }}>
-      <Image
+      <Animatable.Image
+        animation=""
+        //iterationCount={"infinite"}
+        duration={7000}
+        delay={400}
+        easing={"ease-in-out"}
         source={item.img}
         resizeMode="contain"
         className="w-full mt-24 flex-[0.6]"

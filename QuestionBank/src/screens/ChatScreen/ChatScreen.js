@@ -14,12 +14,20 @@ const ChatScreen = () => {
         className="w-full mt-48  h-80"
         source={require("../../assets/ChatBot.png")}
       />
-      <Text className="text-3xl font-[Bold] mt-20 text-[#1D3D78]">
-        Hi, i'm Javis
-        <Animatable.Text animation="shake" duration={1000}>
+      <View className="flex-row mt-20 gap-x-1 items-center justify-center">
+        <Text className="text-3xl font-[Bold] text-[#1D3D78]">
+          Hi, i'm Javis
+        </Text>
+        <Animatable.Text
+          animation="tada"
+          iterationCount={"infinite"}
+          duration={2500}
+          className="text-3xl font-[Bold] text-[#1D3D78]"
+        >
           👋
         </Animatable.Text>
-      </Text>
+      </View>
+
       <Text className="text-3xl mt-1 font-[Bold] text-[#1D3D78]">
         How can i help you?
       </Text>

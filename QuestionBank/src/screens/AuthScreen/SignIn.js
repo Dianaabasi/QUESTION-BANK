@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
+  StyleSheet,
   Image,
   Text,
   TextInput,
   TouchableOpacity,
   View,
   ToastAndroid,
+  Animated,
+  Easing,
 } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
 const SignIn = () => {
@@ -28,8 +31,9 @@ const SignIn = () => {
       .required("Email is required"),
 
     password: Yup.string()
-      .required("Password is required")
-      .min(4, "Password is too short - should be 4 chars minimum"),
+      .min(8, "Password is too short - should be at least 8 chars")
+      .max(20, "Password is too long - max 20 characters")
+      .required("Password is required"),
   });
   const signIn = () => {
     navigation.navigate("Tab");
@@ -45,6 +49,38 @@ const SignIn = () => {
   const forgetPassword = () => {
     navigation.navigate("ForgetPassword");
   };
+  const emailTransY = useRef(new Animated.Value(0));
+  const passwordTransY = useRef(new Animated.Value(0));
+
+  const handleFocus = (field) => {
+    if (field === "email") {
+      Animated.timing(emailTransY.current, {
+        toValue: -25,
+        duration: 300,
+        useNativeDriver: true,
+        easing: Easing.ease,
+      }).start();
+    } else if (field === "password") {
+      Animated.timing(passwordTransY.current, {
+        toValue: -25,
+        duration: 300,
+        useNativeDriver: true,
+        easing: Easing.ease,
+      }).start();
+    }
+  };
+
+  const emailTransXInterpolation = emailTransY.current.interpolate({
+    inputRange: [0, 1],
+    outputRange: [10, -5],
+    extrapolate: "clamp",
+  });
+
+  const passwordTransXInterpolation = passwordTransY.current.interpolate({
+    inputRange: [0, 1],
+    outputRange: [10, -5],
+    extrapolate: "clamp",
+  });
 
   return (
     <View>
@@ -88,15 +124,28 @@ const SignIn = () => {
                   color={colors.text}
                   size={25}
                 />
+                <Animated.View
+                  className="ml-6 mt-3"
+                  style={[
+                    styles.floatingLabel,
+                    {
+                      transform: [
+                        { translateY: emailTransY.current },
+                        { translateX: emailTransXInterpolation },
+                      ],
+                    },
+                  ]}
+                >
+                  <Text className="font-[SemiBold] text-lg">Email</Text>
+                </Animated.View>
                 <TextInput
                   name="email"
                   style={{ color: colors.text }}
-                  placeholderTextColor={colors.text}
-                  className="ml-2 text-lg flex-1 font-[SemiBold] "
-                  placeholder="Email"
+                  className="ml-2 text-lg flex-1 font-[Medium] "
                   value={values.email}
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
+                  onFocus={() => handleFocus("email")}
                 />
                 {errors.email && touched.email && (
                   <Text className="text-red-500 font-[Medium]">
@@ -110,16 +159,29 @@ const SignIn = () => {
                   color={colors.text}
                   size={25}
                 />
+                <Animated.View
+                  className="ml-6 mt-3"
+                  style={[
+                    styles.floatingLabel,
+                    {
+                      transform: [
+                        { translateY: passwordTransY.current },
+                        { translateX: passwordTransXInterpolation },
+                      ],
+                    },
+                  ]}
+                >
+                  <Text className="font-[SemiBold] text-lg">Password</Text>
+                </Animated.View>
                 <TextInput
                   name="password"
                   style={{ color: colors.text }}
-                  placeholderTextColor={colors.text}
-                  className="ml-2 text-lg flex-1 font-[SemiBold]"
-                  placeholder="Password"
+                  className="ml-2 text-lg flex-1 font-[Medium]"
                   secureTextEntry={!open}
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
+                  onFocus={() => handleFocus("password")}
                 />
                 {errors.password && touched.password && (
                   <Text className="text-red-500 font-[Medium]">
@@ -222,3 +284,14 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const styles = StyleSheet.create({
+  floatingLabel: {
+    position: "absolute",
+  },
+});
+
+//  .matches(
+//         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+//         "must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+//       )

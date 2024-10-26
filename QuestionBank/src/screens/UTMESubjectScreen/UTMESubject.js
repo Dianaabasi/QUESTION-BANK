@@ -10,39 +10,74 @@ import {
   Image,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { Checkbox } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-const utmeSubjects = [
-  { id: 1, name: "Arts" },
-  { id: 2, name: "Commerce" },
-  { id: 3, name: "Education" },
-  { id: 4, name: "Engineering" },
-  { id: 5, name: "Law" },
-  { id: 6, name: "Agriculture" },
-  { id: 7, name: "Biology" },
-  { id: 8, name: "Chemistry" },
-  { id: 9, name: "Computer Science" },
-  { id: 10, name: "Criminology" },
-  { id: 11, name: "Economics" },
-  { id: 12, name: "Accounting" },
-  { id: 13, name: "English literature" },
-  { id: 14, name: "Civi Education" },
-  { id: 15, name: "Mathematics" },
-  { id: 16, name: "English language" },
-];
+import { utmeSubjects } from "../../data/subject"; // Add this lin
 
 const UTMESubject = () => {
   const { colors } = useTheme();
   const nav = useNavigation();
   const [selectedSubjects, setSelectedSubjects] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [check, setCheck] = useState(false);
+  const [selectedSubjectsArray, setSelectedSubjectsArray] = useState([]);
 
   const handleSubjectSelect = (subjectId) => {
-    console.log("Selected", subjectId);
+    setSelectedSubjects((prev) => ({
+      ...prev,
+      [subjectId]: !prev[subjectId],
+    }));
+    // Update selectedSubjectsArray
+    const newSelectedSubjectsArray = Object.values(selectedSubjects).reduce(
+      (acc, isSelected, index) => {
+        acc.push({ id: index, name: utmeSubjects[index]?.name || "" });
+        return acc;
+      },
+      []
+    );
+
+    console.log("Updated selectedSubjects:", selectedSubjects);
+    console.log("Updated selectedSubjectsArray:", newSelectedSubjectsArray);
+    setSelectedSubjectsArray(newSelectedSubjectsArray);
   };
-  const checkbox = () => {
-    setCheck(!check);
+  console.log(selectedSubjects);
+  console.log(selectedSubjectsArray);
+  const getNumberOfSelectedSubjects =
+    Object.values(selectedSubjects).filter(Boolean).length;
+  console.log(getNumberOfSelectedSubjects);
+
+  const renderCheckbox = ({ item, index }) => {
+    const isSelected = selectedSubjects[item.id];
+    return (
+      <Animatable.View
+        animation="fadeInUp"
+        duration={1000}
+        delay={index * 80}
+        style={[styles.card, { backgroundColor: colors.background }]}
+        className="mx-5 p-5 my-2 flex-row"
+      >
+        <TouchableOpacity
+          className="items-center justify-center gap-2 flex-row"
+          onPress={() => handleSubjectSelect(item.id)}
+        >
+          <MaterialCommunityIcons
+            name={isSelected ? "checkbox-marked" : "checkbox-blank-outline"}
+            color={isSelected ? "orange" : "black"}
+            size={25}
+          />
+          <Text style={{ color: colors.text }} className="font-[Medium]">
+            {item.name}
+          </Text>
+        </TouchableOpacity>
+      </Animatable.View>
+    );
+  };
+
+  const handleConfirmSelection = () => {
+    if (getNumberOfSelectedSubjects !== 4) {
+      setModalVisible(true);
+    } else {
+      nav.navigate("CBT");
+    }
   };
   const hideModal = () => {
     setModalVisible(false);
@@ -52,34 +87,12 @@ const UTMESubject = () => {
       <FlatList
         //contentContainerStyle={{ paddingTop: 40 }}
         data={utmeSubjects}
-        renderItem={({ item, index }) => (
-          <Animatable.View
-            animation="fadeInUp"
-            duration={1000}
-            delay={index * 80}
-            style={[styles.card, { backgroundColor: colors.background }]}
-            className="mx-5 p-5 my-2 flex-row"
-          >
-            <TouchableOpacity
-              className="items-center justify-center gap-2 flex-row"
-              onPress={() => handleSubjectSelect(item.id)}
-            >
-              <MaterialCommunityIcons
-                name={check ? "checkbox-marked" : "checkbox-blank-outline"}
-                color={colors.text}
-                size={25}
-              />
-              <Text style={{ color: colors.text }} className="font-[Medium]">
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-          </Animatable.View>
-        )}
+        renderItem={renderCheckbox}
         keyExtractor={(item) => item.id}
       />
       <View className="mx-9 my-4">
         <TouchableOpacity
-          onPress={() => setModalVisible(true)}
+          onPress={handleConfirmSelection}
           className="bg-[#1D3D78] p-3 items-center justify-center rounded-3xl"
         >
           <Text className="font-[SemiBold] uppercase text-base text-white">
@@ -116,7 +129,8 @@ const UTMESubject = () => {
               className="font-[Medium] text-base text-center"
               style={{ color: colors.text }}
             >
-              Select not more that than 4 subject.
+              You selected {getNumberOfSelectedSubjects} subjects, please Select
+              exactly 4 subjects
             </Text>
             <TouchableOpacity
               onPress={hideModal}

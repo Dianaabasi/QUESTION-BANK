@@ -45,7 +45,7 @@ const StackNavigation = () => {
         headerMode: "screen",
         headerTintColor: "white",
       }}
-      initialRouteName=""
+      initialRouteName="Tab"
     >
       <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="StartTrial" component={StartTrail} />
@@ -63,7 +63,11 @@ const StackNavigation = () => {
           headerLeft: () => (
             <View className="flex-row items-center">
               <TouchableOpacity onPress={goBack} className="mr-2">
-                <MaterialIcons name="chevron-left" size={30} color="white" />
+                <Image
+                  className="w-6  h-4"
+                  style={{ resizeMode: "contain" }}
+                  source={require("../assets/leftArrow.png")}
+                />
               </TouchableOpacity>
               <View className="mr-2 bg-slate-600 rounded-full p-2">
                 <Image
@@ -97,6 +101,15 @@ const StackNavigation = () => {
           headerStyle: {
             backgroundColor: "#1D3D78",
           },
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack} className="mr-2">
+              <Image
+                className="w-6  h-4"
+                style={{ resizeMode: "contain" }}
+                source={require("../assets/leftArrow.png")}
+              />
+            </TouchableOpacity>
+          ),
           headerTitle: "Select Subject",
         }}
         name="UTMESubject"
@@ -112,6 +125,15 @@ const StackNavigation = () => {
           headerStyle: {
             backgroundColor: "#1D3D78",
           },
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack} className="mr-2">
+              <Image
+                className="w-6  h-4"
+                style={{ resizeMode: "contain" }}
+                source={require("../assets/leftArrow.png")}
+              />
+            </TouchableOpacity>
+          ),
           headerTitle: "Account Setting",
         }}
         name="AccountSetting"
@@ -123,6 +145,15 @@ const StackNavigation = () => {
           headerStyle: {
             backgroundColor: "#1D3D78",
           },
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack} className="mr-2">
+              <Image
+                className="w-6 h-4"
+                style={{ resizeMode: "contain" }}
+                source={require("../assets/leftArrow.png")}
+              />
+            </TouchableOpacity>
+          ),
           headerTitle: "Change Password",
         }}
         name="PasswordChange"
@@ -134,6 +165,15 @@ const StackNavigation = () => {
           headerStyle: {
             backgroundColor: "#1D3D78",
           },
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack} className="mr-2">
+              <Image
+                className="w-6 h-4"
+                style={{ resizeMode: "contain" }}
+                source={require("../assets/leftArrow.png")}
+              />
+            </TouchableOpacity>
+          ),
           headerTitle: "Payment",
         }}
         name="AddPayment"
@@ -145,6 +185,15 @@ const StackNavigation = () => {
           headerStyle: {
             backgroundColor: "#1D3D78",
           },
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack} className="mr-2">
+              <Image
+                className="w-6  h-4"
+                style={{ resizeMode: "contain" }}
+                source={require("../assets/leftArrow.png")}
+              />
+            </TouchableOpacity>
+          ),
           headerTitle: "Notification",
         }}
         name="Notification"

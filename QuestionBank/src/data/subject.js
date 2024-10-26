@@ -1,0 +1,18 @@
+export const utmeSubjects = [
+  { id: 1, name: "Arts" },
+  { id: 2, name: "Commerce" },
+  { id: 3, name: "Education" },
+  { id: 4, name: "Engineering" },
+  { id: 5, name: "Law" },
+  { id: 6, name: "Agriculture" },
+  { id: 7, name: "Biology" },
+  { id: 8, name: "Chemistry" },
+  { id: 9, name: "Computer Science" },
+  { id: 10, name: "Criminology" },
+  { id: 11, name: "Economics" },
+  { id: 12, name: "Accounting" },
+  { id: 13, name: "English literature" },
+  { id: 14, name: "Civi Education" },
+  { id: 15, name: "Mathematics" },
+  { id: 16, name: "English language" },
+];

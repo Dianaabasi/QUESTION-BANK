@@ -1,13 +1,18 @@
 import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
+import { FloatingLabelInput } from "react-native-floating-label-input";
 
 const ResetPassword = () => {
   const [open, setOpen] = useState(false);
-
   const navigation = useNavigation();
+  const [cont, setCont] = useState("");
+  const [show, setShow] = useState(false);
+
+  const Show = () => setShow(!show);
+
   const goBack = () => {
     //navigation.navigate("SignUp");
     navigation.goBack();
@@ -18,6 +23,7 @@ const ResetPassword = () => {
   const PasswordSecure = () => {
     setOpen(!open);
   };
+
   return (
     <SafeAreaView className="flex-1">
       <View className="py-8">
@@ -26,7 +32,7 @@ const ResetPassword = () => {
         </TouchableOpacity>
         <View className="mx-8 mt-24">
           <Text className="text-3xl mb-2 font-[Bold]">Reset Password</Text>
-          <Text className="font-[Medium]">
+          <Text className="font-[Medium] mb-5">
             Please enter the Verfrication code sent to
             <Text className="font-[SemiBold]">debbiesakani@gmail.com</Text>
           </Text>

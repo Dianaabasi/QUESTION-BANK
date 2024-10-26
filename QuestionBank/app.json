@@ -7,7 +7,7 @@
     "icon": "./src/assets/logo_3.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/logo_1.png",
+      "image": "./src/assets/logo_3.png",
       "resizeMode": "contain",
       "backgroundColor": "#00327c"
     },
@@ -23,6 +23,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "48889114-9946-4bd8-b69e-c89d05b428a5"
+      }
     }
   }
 }

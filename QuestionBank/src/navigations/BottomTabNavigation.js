@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SettingScreen, HomeScreen } from "../components/ScreenImport";
 import { useTheme, useNavigation } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { View, Text, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -57,7 +57,11 @@ const BottomTabNavigation = () => {
           },
           headerLeft: () => (
             <TouchableOpacity onPress={goBack} className="ml-2">
-              <MaterialIcons name="chevron-left" size={30} color="white" />
+              <Image
+                className="w-6 h-4"
+                style={{ resizeMode: "contain" }}
+                source={require("../assets/leftArrow.png")}
+              />
             </TouchableOpacity>
           ),
           headerTitleStyle: {

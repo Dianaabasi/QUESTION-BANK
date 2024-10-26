@@ -1,18 +1,43 @@
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  Animated,
+  Easing,
+  StyleSheet,
+} from "react-native";
+import React, { useState, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
 const ForgottenPassword = () => {
   const navigation = useNavigation();
+  const { colors } = useTheme();
   const goBack = () => {
     navigation.navigate("SignUp");
   };
   const goPasswordVer = () => {
     navigation.navigate("PasswordVer");
   };
-  const { colors } = useTheme();
+  const emailTransY = useRef(new Animated.Value(0));
+  const handleFocus = (field) => {
+    if (field === "email") {
+      Animated.timing(emailTransY.current, {
+        toValue: -25,
+        duration: 300,
+        useNativeDriver: true,
+        easing: Easing.ease,
+      }).start();
+    }
+  };
+  const emailTransXInterpolation = emailTransY.current.interpolate({
+    inputRange: [0, 1],
+    outputRange: [10, -5],
+    extrapolate: "clamp",
+  });
   return (
     <SafeAreaView className="flex-1">
       <View className="py-8">
@@ -31,9 +56,23 @@ const ForgottenPassword = () => {
               color="black"
               size={25}
             />
+            <Animated.View
+              className="ml-6 mt-3"
+              style={[
+                styles.floatingLabel,
+                {
+                  transform: [
+                    { translateY: emailTransY.current },
+                    { translateX: emailTransXInterpolation },
+                  ],
+                },
+              ]}
+            >
+              <Text className="font-[SemiBold] text-lg">Email</Text>
+            </Animated.View>
             <TextInput
+              onFocus={() => handleFocus("email")}
               className="ml-2 text-lg flex-1 font-[SemiBold] "
-              placeholder="Email"
             />
           </View>
         </View>
@@ -53,3 +92,8 @@ const ForgottenPassword = () => {
 };
 
 export default ForgottenPassword;
+const styles = StyleSheet.create({
+  floatingLabel: {
+    position: "absolute",
+  },
+});

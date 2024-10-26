@@ -14,6 +14,7 @@ import DarkTheme from "./src/theme/DarkTheme";
 import LightTheme from "./src/theme/LightTheme";
 import { NavigationContainer } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, Image } from "react-native";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
 
 export default function App() {
   const [isSplashScreen, setSplashScreen] = useState(true);
@@ -40,7 +41,7 @@ export default function App() {
   if (!fontsLoaded) {
     return (
       <View className="bg-[#1D3D78] flex-1 justify-center items-center">
-        <Text className="text-center">Loading...</Text>
+        <ActivityIndicator animating={true} color={MD2Colors.white} size={30} />
       </View>
     );
   }

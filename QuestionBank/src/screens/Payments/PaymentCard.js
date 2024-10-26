@@ -10,13 +10,10 @@ import {
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 const PaymentCard = () => {
   const navigation = useNavigation();
   const [check, setCheck] = useState(false);
-  const [date, setDate] = useState(null);
-  const [showPicker, setShowPicker] = useState(false);
   const { colors } = useTheme();
 
   const goBack = () => {
@@ -26,31 +23,6 @@ const PaymentCard = () => {
     setCheck(!check);
   };
 
-  const handleDateChange = (event, selecteDate) => {
-    if (event.type === "set") {
-      const currentDate = selecteDate || date;
-      setDate(currentDate);
-    }
-    setShowPicker(false);
-  };
-
-  const formatDate = (date) => {
-    if (!date) return "";
-
-    // Get the month as a number (1-12)
-    const monthNumber = date.getMonth() + 1;
-
-    // Format the month as MM
-    const monthFormatted = monthNumber.toString().padStart(2, "0");
-
-    // Get the year as a two-digit number
-    const year = date.getFullYear() % 100; // This gives us the last two digits of the year
-
-    // Return the formatted date string
-    return `${monthFormatted}/${year}`;
-  };
-
-  console.log(formatDate(date));
   return (
     <SafeAreaView className="flex-1">
       <TouchableOpacity onPress={goBack} className=" mx-7 my-8">
@@ -86,23 +58,14 @@ const PaymentCard = () => {
                 placeholder="05 / 24"
                 className="text-base flex-1 font-[Medium]"
                 keyboardType="numeric"
-                value={formatDate(date)}
               />
-              <TouchableOpacity onPress={() => setShowPicker(true)}>
+              <TouchableOpacity>
                 <MaterialCommunityIcons
                   name="calendar"
                   color={colors.text}
                   size={17}
                 />
               </TouchableOpacity>
-              {showPicker && (
-                <DateTimePicker
-                  value={date || new Date()}
-                  mode={"date"}
-                  display={"spinner"}
-                  onChange={handleDateChange}
-                />
-              )}
             </View>
           </View>
           <View className="">
@@ -146,7 +109,10 @@ const PaymentCard = () => {
               Cancel
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-row bg-[#1D3D78] items-center justify-center w-32 rounded-3xl h-11">
+          <TouchableOpacity
+            onPress={() => paystackWebViewRef.current.startTransaction()}
+            className="flex-row bg-[#1D3D78] items-center justify-center w-32 rounded-3xl h-11"
+          >
             <Text
               //style={{ color: colors.text }}
               className="text-base text-white font-[Medium]"

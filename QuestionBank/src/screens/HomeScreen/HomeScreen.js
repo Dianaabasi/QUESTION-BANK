@@ -1,9 +1,10 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import Slider from "../../components/Home/Slider";
 import HomeItems from "../../components/Home/HomeItems";
 import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
+import { ScrollView } from "react-native-virtualized-view";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -24,7 +25,7 @@ const HomeScreen = () => {
           <Animatable.Image
             animation="tada"
             iterationCount={"infinite"}
-            duration={5000}
+            duration={4000}
             className="w-10 h-10 "
             source={require("../../assets/chatbot.png")}
           />

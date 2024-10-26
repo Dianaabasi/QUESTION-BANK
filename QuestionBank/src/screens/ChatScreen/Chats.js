@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Animatable from "react-native-animatable";
 
 const Chats = () => {
   const [input, setInput] = useState("");
@@ -18,6 +19,7 @@ const Chats = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
+  const scrollViewRef = useRef(null);
 
   useEffect(() => {
     loadMessagesFromStorage();
@@ -25,6 +27,7 @@ const Chats = () => {
 
   useEffect(() => {
     saveMessagesToStorage(messages);
+    scrollViewRef.current?.scrollToEnd({ animated: true });
   }, [messages]);
 
   const loadMessagesFromStorage = useCallback(async () => {
@@ -93,7 +96,7 @@ const Chats = () => {
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${await response.text()}`);
         }
-
+        setIsLoading(true);
         const data = await response.json();
         console.log(data);
         const newAssistantMessage = {
@@ -122,7 +125,13 @@ const Chats = () => {
       minute: "2-digit",
       hour12: true,
     });
-
+    {
+      isLoading && (
+        <View>
+          <Text>Jarvis is typing</Text>
+        </View>
+      );
+    }
     if (item.type === "user") {
       return (
         <View className="items-end my-2">
@@ -139,7 +148,7 @@ const Chats = () => {
           </View>
         </View>
       );
-    } else {
+    } else if (item.type === "assistant") {
       return (
         <View className="my-2">
           <View className="flex-row gap-x-1">
@@ -153,18 +162,12 @@ const Chats = () => {
                 }}
               />
             </View>
-            {isLoading ? (
-              <View className="bg-[#C7C4C4] w-[70%] p-4 rounded-3xl">
-                <ActivityIndicator size="small" color="#000" />
-              </View>
-            ) : (
-              <View className="bg-[#C7C4C4] w-[70%] p-4 rounded-3xl">
-                <Text className=" font-[Medium]">{item.content}</Text>
-                <Text className="text-xs font-[Medium] text-right text-gray-400">
-                  {formattedTimestamp}
-                </Text>
-              </View>
-            )}
+            <View className="bg-[#C7C4C4] w-[70%] p-4 rounded-3xl">
+              <Text className=" font-[Medium]">{item.content}</Text>
+              <Text className="text-xs font-[Medium] text-right text-gray-400">
+                {formattedTimestamp}
+              </Text>
+            </View>
           </View>
         </View>
       );
@@ -174,8 +177,10 @@ const Chats = () => {
   return (
     <View className="flex-1 p-2">
       <FlatList
+        ref={scrollViewRef}
         data={messages}
         renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
       />
       <View className="flex-row items-center gap-2 p-1">

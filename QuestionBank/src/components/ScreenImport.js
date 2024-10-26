@@ -1,5 +1,5 @@
 import Onboarding from "../screens/OnboardingScreen/OnboardingScreen";
-import SignUp from "../screens/SignUpScreen/SignUpScreen";
+import SignUp from "../screens/AuthScreen/SignUpScreen";
 import ChatScreen from "../screens/ChatScreen/ChatScreen";
 import StartTrail from "../screens/OnboardingScreen/StartTrial";
 import AddPayment from "../screens/Payments/AddPayment";
